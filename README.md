@@ -38,6 +38,7 @@ npm start
 
 
 Weekly Progress:
+
 Week 1: Literature review, contract design
 
 Week 2: Smart contract and testnet deployment
