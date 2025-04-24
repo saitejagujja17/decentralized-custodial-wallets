@@ -38,7 +38,16 @@ npm start
 
 Weekly Progress:
 Week 1: Literature review, contract design
+Weekly Progress:
+Week 1: Literature review, contract design
 Week 2: Smart contract and testnet deployment
+- Implemented TimeLockedWallet.sol
+- Configured Hardhat with Sepolia network and Infura
+- Set up .env for RPC and wallet key
+- Wrote and ran deploy.js script
+- Deployed to Sepolia: 0x7559c7924f7512b058CFB7b4d7bBa3E22F95217b
+- Verified on Sepolia Etherscan
+
 Week 3: React frontend and integration
 Week 4: Final demo, report, and video
 
