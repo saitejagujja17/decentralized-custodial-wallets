@@ -5,29 +5,27 @@ import { CONTRACT_ADDRESS, CONTRACT_ABI } from "./walletConfig";
 function App() {
   const [account, setAccount] = useState(null);
   const [contract, setContract] = useState(null);
-  const [provider, setProvider] = useState(null);
   const [unlockTime, setUnlockTime] = useState(null);
   const [amount, setAmount] = useState("");
 
   async function connectWallet() {
     if (window.ethereum) {
       try {
-        const newProvider = new BrowserProvider(window.ethereum);
         await window.ethereum.request({ method: "eth_requestAccounts" });
-        const signer = await newProvider.getSigner();
+        const provider = new BrowserProvider(window.ethereum);
+        const signer = await provider.getSigner();
         const address = await signer.getAddress();
         setAccount(address);
 
-        const newContract = new ethers.Contract(CONTRACT_ADDRESS, CONTRACT_ABI, signer);
-        setContract(newContract);
-        setProvider(newProvider);
+        const contractInstance = new ethers.Contract(CONTRACT_ADDRESS, CONTRACT_ABI, signer);
+        setContract(contractInstance);
 
         console.log("Connected address:", address);
       } catch (err) {
-        console.error("Error connecting:", err);
+        console.error("Error connecting wallet:", err);
       }
     } else {
-      alert("Please install MetaMask to use this app.");
+      alert("MetaMask is not installed. Please install it to use this app.");
     }
   }
 
@@ -71,6 +69,7 @@ function App() {
     if (contract) {
       getUnlockTime();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [contract]);
 
   return (
