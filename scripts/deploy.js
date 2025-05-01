@@ -1,16 +1,10 @@
 const hre = require("hardhat");
 
 async function main() {
-  const [deployer] = await hre.ethers.getSigners();
-  const unlockTime = Math.floor(Date.now() / 1000) + 3600; // 1 hour from now
-
-  const contract = await hre.ethers.deployContract("TimeLockedWallet", [
-    deployer.address,
-    unlockTime
-  ]);
-
+  const Vault = await hre.ethers.getContractFactory("AdvancedTimeVault2");
+  const contract = await Vault.deploy();
   await contract.waitForDeployment();
-  console.log("TimeLockedWallet deployed to:", contract.target);
+  console.log("AdvancedTimeVault2 deployed to:", await contract.getAddress());
 }
 
 main().catch((error) => {
