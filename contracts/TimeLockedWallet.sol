@@ -2,26 +2,28 @@
 pragma solidity ^0.8.18;
 
 contract TimeLockedWallet {
-    address public owner;
-    address public beneficiary;
-    uint256 public unlockTime;
+    mapping(address => uint256) public balances;
+    mapping(address => uint256) public unlockTimes;
 
-    constructor(address _beneficiary, uint256 _unlockTime) payable {
-        require(_unlockTime > block.timestamp, "Unlock time must be in the future");
-
-        owner = msg.sender;
-        beneficiary = _beneficiary;
-        unlockTime = _unlockTime;
+    function depositWithUnlock(uint256 unlockAfterSeconds) public payable {
+        require(msg.value > 0, "Must send ETH");
+        uint256 unlockAt = block.timestamp + unlockAfterSeconds;
+        balances[msg.sender] += msg.value;
+        unlockTimes[msg.sender] = unlockAt;
     }
 
     function withdraw() public {
-        require(msg.sender == beneficiary, "Only the beneficiary can withdraw");
-        require(block.timestamp >= unlockTime, "Funds are still locked");
+        require(balances[msg.sender] > 0, "No balance to withdraw");
+        require(block.timestamp >= unlockTimes[msg.sender], "Funds are still locked");
 
-        payable(beneficiary).transfer(address(this).balance);
+        uint256 amount = balances[msg.sender];
+        balances[msg.sender] = 0;
+        unlockTimes[msg.sender] = 0;
+
+        payable(msg.sender).transfer(amount);
     }
 
-    function deposit() public payable {}
-
-    receive() external payable {}
+    function getUnlockTime(address user) public view returns (uint256) {
+        return unlockTimes[user];
+    }
 }

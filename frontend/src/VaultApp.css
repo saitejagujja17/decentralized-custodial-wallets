@@ -1,0 +1,59 @@
+.vault-app {
+  padding: 20px;
+  font-family: sans-serif;
+  max-width: 1000px;
+  margin: auto;
+}
+
+.connected {
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.connect-button,
+.deposit-form button,
+.withdraw-button {
+  background-color: #3f51b5;
+  color: white;
+  padding: 8px 14px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.connect-button:hover,
+.deposit-form button:hover,
+.withdraw-button:hover {
+  background-color: #303f9f;
+}
+
+.deposit-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 30px;
+}
+
+.deposit-form input {
+  padding: 8px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+
+.vault-section {
+  margin-top: 40px;
+}
+
+.vault-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+.vault-table th,
+.vault-table td {
+  padding: 10px;
+  border: 1px solid #ddd;
+  text-align: center;
+}
