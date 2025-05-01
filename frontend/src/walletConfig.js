@@ -1,4 +1,4 @@
-export const CONTRACT_ADDRESS = "0xCDf9D1E3a7666fFCD44B41a0070FDf7d0Dc11d29";
+export const CONTRACT_ADDRESS = "0x792db28b6c52F5F6E02169B2DC94BB003bcc7151";
 
 export const CONTRACT_ABI = [
   
@@ -75,6 +75,11 @@ export const CONTRACT_ABI = [
         "internalType": "uint256",
         "name": "unlockAfterSeconds",
         "type": "uint256"
+      },
+      {
+        "internalType": "address",
+        "name": "beneficiary",
+        "type": "address"
       }
     ],
     "name": "depositETH",
@@ -103,6 +108,11 @@ export const CONTRACT_ABI = [
         "internalType": "uint256",
         "name": "unlockAfterSeconds",
         "type": "uint256"
+      },
+      {
+        "internalType": "address",
+        "name": "beneficiary",
+        "type": "address"
       }
     ],
     "name": "depositToken",
@@ -146,6 +156,11 @@ export const CONTRACT_ABI = [
             "internalType": "bool",
             "name": "withdrawn",
             "type": "bool"
+          },
+          {
+            "internalType": "address",
+            "name": "beneficiary",
+            "type": "address"
           }
         ],
         "internalType": "struct AdvancedTimeVault2.Vault[]",
@@ -195,6 +210,11 @@ export const CONTRACT_ABI = [
         "internalType": "bool",
         "name": "withdrawn",
         "type": "bool"
+      },
+      {
+        "internalType": "address",
+        "name": "beneficiary",
+        "type": "address"
       }
     ],
     "stateMutability": "view",
