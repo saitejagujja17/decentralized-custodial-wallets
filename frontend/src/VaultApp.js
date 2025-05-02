@@ -214,7 +214,16 @@ export default function VaultApp() {
         <button onClick={connectWallet} className="connect-button">🔑 Connect Wallet</button>
       ) : (
         <div>
-          <p style={{ fontWeight: "bold", color: "green" }}> Connected Wallet:{account}</p>
+          <p style={{
+    fontWeight: 900,           // extra-bold
+    color: "green",
+    fontSize: "1.5rem",        // bigger text
+    letterSpacing: "0.05em"    // optional slight spread
+  }}
+>
+  Connected Wallet: {account}
+</p>
+
 
 
           <div className="deposit-form">

@@ -1,59 +1,156 @@
+/* frontend/src/VaultApp.css */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+
+/* 1) Full‐screen gradient background */
+body,
+#root {
+  height: 100vh;
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #3d0ed7 0%, #3d0ed7 100%);
+}
+
+/* 2) Main container */
 .vault-app {
-  padding: 20px;
-  font-family: sans-serif;
-  max-width: 1000px;
-  margin: auto;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+  color: #222;
 }
 
-.connected {
-  font-weight: bold;
-  margin-bottom: 20px;
+/* 3) Header */
+.vault-app h2 {
+  text-align: center;
+  color: #fff;
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
 }
 
-.connect-button,
-.deposit-form button,
-.withdraw-button {
-  background-color: #3f51b5;
-  color: white;
-  padding: 8px 14px;
-  margin: 8px 0;
+/* 4) Connect button */
+.connect-button {
+  display: block;
+  margin: 2rem auto 3rem;
+  padding: 0.75rem 2rem;
+  font-size: 1.1rem;
+  color: #fff;
+  background: #ff8c00;
   border: none;
-  border-radius: 4px;
+  border-radius: 0.5rem;
   cursor: pointer;
+  transition: background 0.2s;
+}
+.connect-button:hover {
+  background: #e07b00;
 }
 
-.connect-button:hover,
-.deposit-form button:hover,
-.withdraw-button:hover {
-  background-color: #303f9f;
+/* 5) Account banner */
+.connected {
+  text-align: center;
+  font-weight: bold;
+  color: #a0ff83;
+  margin-bottom: 1.5rem;
 }
 
-.deposit-form {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  margin-bottom: 30px;
-}
-
-.deposit-form input {
-  padding: 8px;
-  border-radius: 4px;
-  border: 1px solid #ccc;
-}
-
+/* 6) Card styling for deposit & vault sections */
+.deposit-form,
 .vault-section {
-  margin-top: 40px;
+  background: #f0f3ff;
+  border-radius: 0.75rem;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+
+  /* ← NEW: allow horizontal scroll if child is too wide */
+  overflow-x: auto;
 }
 
+/* 7) Form inputs & buttons */
+.deposit-form input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  margin-bottom: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+}
+.deposit-form button {
+  width: 100%;
+  padding: 0.75rem;
+  font-size: 1rem;
+  background: #4b6cb7;
+  color: #fff;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.deposit-form button:hover {
+  background: #3a53a0;
+}
+
+/* 8) Vault tables */
 .vault-table {
   width: 100%;
+  /* ← ensures table fills its container */
   border-collapse: collapse;
-  margin-top: 10px;
-}
+  margin-top: 1rem;
 
+  /* ← optional: keep a minimum width so it doesn’t shrink too far */
+  min-width: 600px;
+  table-layout: auto;
+}
 .vault-table th,
 .vault-table td {
-  padding: 10px;
-  border: 1px solid #ddd;
-  text-align: center;
+  padding: 0.75rem 1rem;
+  text-align: left;
+}
+.vault-table thead {
+  background: #d1d9ff;
+  color: #111;
+  font-weight: 600;
+}
+.vault-table tbody tr:nth-child(odd) {
+  background: #fff;
+}
+.vault-table tbody tr:nth-child(even) {
+  background: #f7f9ff;
+}
+.vault-table tbody tr:hover {
+  background: #e4e9ff;
+}
+
+/* 9) Withdraw controls */
+.withdraw-button {
+  padding: 0.4rem 0.8rem;
+  background: #24a19c;
+  color: #fff;
+  border: none;
+  border-radius: 0.4rem;
+  cursor: pointer;
+  margin-left: 0.5rem;
+  transition: background 0.2s;
+}
+.withdraw-button:hover {
+  background: #1b7d79;
+}
+
+/* 10) Countdown styling */
+.countdown {
+  margin-top: 0.25rem;
+  font-size: 0.85rem;
+  color: #555;
+}
+
+/* 11) Responsive tweaks */
+@media (max-width: 700px) {
+  .vault-table th,
+  .vault-table td {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.9rem;
+  }
+  .deposit-form input,
+  .deposit-form button {
+    font-size: 0.95rem;
+  }
 }
