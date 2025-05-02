@@ -1,4 +1,4 @@
-export const CONTRACT_ADDRESS = "0x792db28b6c52F5F6E02169B2DC94BB003bcc7151";
+export const CONTRACT_ADDRESS = "0xd461C024928AFbc5BFa1B1Ab002B97F12ee4DF5a";
 
 export const CONTRACT_ABI = [
   
@@ -153,14 +153,14 @@ export const CONTRACT_ABI = [
             "type": "string"
           },
           {
-            "internalType": "bool",
-            "name": "withdrawn",
-            "type": "bool"
-          },
-          {
             "internalType": "address",
             "name": "beneficiary",
             "type": "address"
+          },
+          {
+            "internalType": "bool",
+            "name": "withdrawn",
+            "type": "bool"
           }
         ],
         "internalType": "struct AdvancedTimeVault2.Vault[]",
@@ -207,14 +207,14 @@ export const CONTRACT_ABI = [
         "type": "string"
       },
       {
-        "internalType": "bool",
-        "name": "withdrawn",
-        "type": "bool"
-      },
-      {
         "internalType": "address",
         "name": "beneficiary",
         "type": "address"
+      },
+      {
+        "internalType": "bool",
+        "name": "withdrawn",
+        "type": "bool"
       }
     ],
     "stateMutability": "view",

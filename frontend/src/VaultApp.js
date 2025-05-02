@@ -214,7 +214,8 @@ export default function VaultApp() {
         <button onClick={connectWallet} className="connect-button">🔑 Connect Wallet</button>
       ) : (
         <div>
-          <p className="connected">🔐 Connected as: {account}</p>
+          <p style={{ fontWeight: "bold", color: "green" }}> Connected Wallet:{account}</p>
+
 
           <div className="deposit-form">
             <h3>💰 Deposit ETH</h3>
