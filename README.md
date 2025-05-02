@@ -1,56 +1,51 @@
-PROJECT:Decentralized Custodial Wallet Models
-
+Time-Locked Ethereum Wallet for Kids Using Smart Contracts
+Authors
+Sai Teja Gujja – saiteja.gujja-1@ou.edu
+Vinaykrishna Mattela – vinaykrishna.mattela-1@ou.edu
+Project: Decentralized Custodial Wallet Models
 This project explores and compares three decentralized custodial wallet mechanisms on Ethereum:
 - Time-Locked Wallets
-- Multisig Control (e.g., Gnosis Safe-style)
+- Multisig Control (e.g., Gnosis Safe–style)
 - Inheritance Protocols (e.g., Dead Man’s Switch)
 
-Our goal is to evaluate these models based on security, usability, and user control, and to build a prototype for one (Time-Locked ETH Wallet).
+Our goal is to evaluate these models based on security, usability, and user control, and to build a working prototype for one of them (Time-Locked ETH Wallet).
+Tech Stack
+Solidity
+Hardhat
+React.js
+Ethers.js
+MetaMask
+Ethereum Sepolia Testnet
 
-Authors:
-- Sai Teja Gujja – saiteja.gujja-1@ou.edu
-- Vinaykrishna Mattela – vinaykrishna.mattela-1@ou.edu
+Folder Structure
+contracts/ - All Solidity contracts
+frontend/ - React DApp source
+reports/ - Literature reviews & project reports
+scripts/ - Hardhat deployment & utility scripts
+test/ - Contract unit tests
 
-Tech Stack:
-- Solidity
+Getting Started
+Prerequisites:
+- Node.js v16+ & npm
 - Hardhat
-- React.js
-- Ethers.js
 - MetaMask
-- Ethereum Sepolia Testnet
-
-Folder Structure:
-contracts/
-frontend/
-reports/
-test/
-
-Getting Started:
-
-Install dependencies and run tests:
+Install & Test:
+```bash
 npm install
 npx hardhat test
-
-To run the React frontend (to be built in Week 3):
+```
+Deploy to Sepolia:
+1. Add .env with SEPOLIA_RPC_URL and PRIVATE_KEY
+2. npx hardhat compile
+3. npx hardhat run --network sepolia scripts/deploy.js
+Run Frontend:
+```bash
 cd frontend
 npm install
 npm start
-
-
-Weekly Progress:
-
-Week 1: Literature review, contract design
-
-Week 2: Smart contract and testnet deployment
-- Implemented TimeLockedWallet.sol
-- Configured Hardhat with Sepolia network and Infura
-- Set up .env for RPC and wallet key
-- Wrote and ran deploy.js script
-- Deployed to Sepolia: 0x7559c7924f7512b058CFB7b4d7bBa3E22F95217b
-- Verified on Sepolia Etherscan
-
-Week 3: React frontend and integration
-Week 4: Final demo, report, and video
-
-Demo Video:
-To be added in Week 4.
+```
+Weekly Progress
+Week 1: Literature review & contract design
+Week 2: Smart-contract implementation & Sepolia deployment
+Week 3: React frontend development & integration
+Week 4: Final demo, performance report, and video recording
