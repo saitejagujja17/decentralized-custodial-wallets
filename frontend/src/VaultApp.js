@@ -2,6 +2,8 @@
 import { useState, useEffect } from "react";
 import { BrowserProvider, ethers } from "ethers";
 import { CONTRACT_ADDRESS, CONTRACT_ABI } from "./walletConfig";
+import { useCallback } from "react";
+
 import "./VaultApp.css";
 
 export default function VaultApp() {
@@ -73,23 +75,41 @@ export default function VaultApp() {
     }
   }
 
-  async function fetchVaults() {
+  const fetchVaults = useCallback(async () => {
     if (!contract || !account) return;
     try {
-      const data = await contract.getVaults(account);
+      const vaultList = await contract.getVaults(account);
       const now = Date.now() / 1000;
-      const locked = data.filter(v => !v.withdrawn && now < Number(v.unlockTime));
-      const unlocked = data.filter(v => !v.withdrawn && now >= Number(v.unlockTime));
+  
+      const fullList = vaultList.map((v, index) => ({
+        ...v,
+        vaultId: index, // retain the real contract index
+        unlockTime: Number(v.unlockTime),
+        amount: v.amount,
+        withdrawn: v.withdrawn,
+        token: v.token,
+        label: v.label,
+        beneficiary: v.beneficiary
+      }));
+  
+      const locked = fullList.filter(v => !v.withdrawn && now < v.unlockTime);
+      const unlocked = fullList.filter(v => !v.withdrawn && now >= v.unlockTime);
+  
       setLockedVaults(locked);
       setUnlockedVaults(unlocked);
     } catch (err) {
-      console.error("Failed to fetch vaults:", err);
+      console.error("❌ Failed to fetch vaults:", err);
+      setLockedVaults([]);
+      setUnlockedVaults([]);
     }
-  }
+  }, [contract, account]);
+  
+  
 
   useEffect(() => {
-    if (contract && account) fetchVaults();
-  }, [contract, account]);
+    fetchVaults();  // ✅ safe to call now
+  }, [fetchVaults]);  // ✅ warning gone
+  
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -111,8 +131,8 @@ export default function VaultApp() {
     return () => clearInterval(interval);
   }, [lockedVaults]);
 
-  const handleWithdrawChange = (index, value) => {
-    setWithdrawInputs(prev => ({ ...prev, [index]: value }));
+  const handleWithdrawChange = (vaultId, value) => {
+    setWithdrawInputs(prev => ({ ...prev, [vaultId]: value }));
   };
 
   async function withdraw(vaultId, maxAmount) {
@@ -172,11 +192,11 @@ export default function VaultApp() {
                   <input
                     type="text"
                     placeholder="Amount"
-                    value={withdrawInputs[i] || ""}
-                    onChange={e => handleWithdrawChange(i, e.target.value)}
+                    value={withdrawInputs[v.vaultId] || ""}
+                    onChange={e => handleWithdrawChange(v.vaultId, e.target.value)}
                     style={{ width: "70px", marginRight: "5px" }}
                   />
-                  <button onClick={() => withdraw(i, v.amount)} className="withdraw-button">Withdraw</button>
+                  <button onClick={() => withdraw(v.vaultId, v.amount)} className="withdraw-button">Withdraw</button>
                 </>
               )}
             </td>
