@@ -46,9 +46,11 @@ npx hardhat test
 ```
 
 Deploy to Sepolia:
-1. Add .env with SEPOLIA_RPC_URL and PRIVATE_KEY
-2. npx hardhat compile
-3. npx hardhat run --network sepolia scripts/deploy.js
+- Add .env with SEPOLIA_RPC_URL and PRIVATE_KEY
+```bash
+npx hardhat compile
+npx hardhat run --network sepolia scripts/deploy.js
+```
 
 Run Frontend:
 ```bash
