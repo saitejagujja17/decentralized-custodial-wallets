@@ -1,15 +1,18 @@
-Time-Locked Ethereum Wallet for Kids Using Smart Contracts
+Project: Time-Locked Ethereum Wallet for Kids Using Smart Contracts
+
 Authors
 Sai Teja Gujja – saiteja.gujja-1@ou.edu
 Vinaykrishna Mattela – vinaykrishna.mattela-1@ou.edu
-Project: Decentralized Custodial Wallet Models
+
 This project explores and compares three decentralized custodial wallet mechanisms on Ethereum:
 - Time-Locked Wallets
 - Multisig Control (e.g., Gnosis Safe–style)
 - Inheritance Protocols (e.g., Dead Man’s Switch)
 
 Our goal is to evaluate these models based on security, usability, and user control, and to build a working prototype for one of them (Time-Locked ETH Wallet).
+
 Tech Stack
+
 Solidity
 Hardhat
 React.js
@@ -18,26 +21,35 @@ MetaMask
 Ethereum Sepolia Testnet
 
 Folder Structure
+
 contracts/ - All Solidity contracts
+
 frontend/ - React DApp source
+
 reports/ - Literature reviews & project reports
+
 scripts/ - Hardhat deployment & utility scripts
+
 test/ - Contract unit tests
 
 Getting Started
+
 Prerequisites:
 - Node.js v16+ & npm
 - Hardhat
 - MetaMask
+
 Install & Test:
 ```bash
 npm install
 npx hardhat test
 ```
+
 Deploy to Sepolia:
 1. Add .env with SEPOLIA_RPC_URL and PRIVATE_KEY
 2. npx hardhat compile
 3. npx hardhat run --network sepolia scripts/deploy.js
+
 Run Frontend:
 ```bash
 cd frontend
@@ -45,7 +57,11 @@ npm install
 npm start
 ```
 Weekly Progress
+
 Week 1: Literature review & contract design
+
 Week 2: Smart-contract implementation & Sepolia deployment
+
 Week 3: React frontend development & integration
+
 Week 4: Final demo, performance report, and video recording
