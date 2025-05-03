@@ -51,6 +51,11 @@ Deploy to Sepolia:
 npx hardhat compile
 npx hardhat run --network sepolia scripts/deploy.js
 ```
+After deployment
+
+1.Open frontend/src/walletConfig.js and update the CONTRACT_ADDRESS constant to your newly-deployed contract address.
+
+2.Open artifacts/contracts/AdvancedTimeVault2.sol/AdvancedTimeVault2.json, copy its abi array, and paste it over the CONTRACT_ABI in frontend/src/walletConfig.js.
 
 Run Frontend:
 ```bash
