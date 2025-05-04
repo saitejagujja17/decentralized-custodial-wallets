@@ -184,7 +184,8 @@ export default function VaultApp() {
               {!isUnlocked && <div style={{ fontSize: '0.9em', color: '#555' }}>{countdowns[i]}</div>}
             </td>
             <td>{v.label}</td>
-            <td>{v.beneficiary}</td>
+            <td><strong>Child's Account:</strong><br />{v.beneficiary}</td>
+
             <td>{v.withdrawn ? "✅ Withdrawn" : isUnlocked ? "🔓 Unlocked" : "🔒 Locked"}</td>
             <td>
               {isUnlocked && !v.withdrawn && (
