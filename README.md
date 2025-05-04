@@ -63,7 +63,7 @@ Make sure you have:
 
 ```bash
 git clone https://github.com/saitejagujja17/timelock-wallet-For-kids.git
-cd timelock-wallet-For-kids
+cd DECENTRALIZED-CUSTODIAL-WALLETS
 ```
 
 ---
