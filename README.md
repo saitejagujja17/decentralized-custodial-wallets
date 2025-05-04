@@ -74,7 +74,11 @@ Create a `.env` file in the root directory:
 
 ```env
 PRIVATE_KEY=your_private_key_here
-SEPOLIA_URL=https://sepolia.infura.io/v3/YOUR_PROJECT_ID
+SEPOLIA_URL=https://sepolia.infura.io/v3/YOUR_INFURA_PROJECT_ID
+```
+OR(if you're using Alchemy):
+```
+SEPOLIA_URL=https://eth-sepolia.g.alchemy.com/v2/YOUR_ALCHEMY_API_KEY
 ```
 
 Install dependencies:
