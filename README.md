@@ -128,6 +128,41 @@ Open in browser:
 
 ---
 
+
+
+###  Using the dApp
+
+1. **Connect Wallet**
+   - Click " Connect Wallet"
+   - Confirm MetaMask popup (parent wallet)
+
+2. **Enter Vault Details**
+   - Label (e.g., "College Fund")
+   - Amount in ETH (e.g., 0.01)
+   - Beneficiary Address (child wallet)
+   - Unlock Time (any future date-time)
+
+3. **Deposit ETH**
+   - Submit the form
+   - Confirm MetaMask transaction
+
+4. **Reconnect as Beneficiary**
+   - Disconnect parent MetaMask
+   - Connect beneficiary wallet
+
+5. **View Vaults**
+   - Locked vaults visible until unlock
+   - After unlock time → appears in “Unlocked”
+
+6. **Withdraw ETH**
+   - Click Withdraw
+   - Confirm MetaMask again
+
+7. **Verify on Etherscan**
+   - Paste contract address in [Sepolia Etherscan](https://sepolia.etherscan.io) for transactions
+
+---
+
 ##  Features
 
 -  Time-locked ETH deposits for children
