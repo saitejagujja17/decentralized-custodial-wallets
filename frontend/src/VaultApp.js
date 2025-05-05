@@ -1,4 +1,4 @@
-// frontend/src/VaultApp.js
+// Import necessary hooks and Ethereum tools
 import { useState, useEffect } from "react";
 import { BrowserProvider, ethers } from "ethers";
 import { CONTRACT_ADDRESS, CONTRACT_ABI } from "./walletConfig";
@@ -7,6 +7,7 @@ import { useCallback } from "react";
 import "./VaultApp.css";
 
 export default function VaultApp() {
+  // State variables for wallet, contract, form inputs, and vault data
   const [account, setAccount] = useState(null);
   const [contract, setContract] = useState(null);
   const [ethAmount, setEthAmount] = useState("0");
@@ -18,6 +19,7 @@ export default function VaultApp() {
   const [withdrawInputs, setWithdrawInputs] = useState({});
   const [countdowns, setCountdowns] = useState({});
 
+  // Connect to MetaMask and initialize contract
   async function connectWallet() {
     if (window.ethereum) {
       try {
@@ -36,6 +38,7 @@ export default function VaultApp() {
     }
   }
 
+  // Function to handle ETH deposit into vault
   async function depositETH() {
     if (!contract || !ethAmount || !ethUnlockDate || !ethLabel || !beneficiary) {
       alert("❗ Please fill all fields before depositing.");
@@ -47,6 +50,7 @@ export default function VaultApp() {
       return;
     }
 
+    // Calculate unlock time in seconds
     const unlockTime = Math.floor(new Date(ethUnlockDate).getTime() / 1000);
     const now = Math.floor(Date.now() / 1000);
     const unlockInSeconds = unlockTime - now;
@@ -56,6 +60,7 @@ export default function VaultApp() {
       return;
     }
 
+    // Call deposit function on contract
     try {
       const tx = await contract.depositETH(
         ethLabel,
@@ -65,6 +70,8 @@ export default function VaultApp() {
       );
       await tx.wait();
       alert("✅ ETH deposited successfully");
+
+      // Reset form and refresh vaults
       setEthAmount("0");
       setEthLabel("");
       setEthUnlockDate("");
@@ -75,15 +82,16 @@ export default function VaultApp() {
     }
   }
 
+  // Fetch vaults from smart contract and classify as locked/unlocked
   const fetchVaults = useCallback(async () => {
     if (!contract || !account) return;
     try {
       const vaultList = await contract.getVaults(account);
       const now = Date.now() / 1000;
-  
+
       const fullList = vaultList.map((v, index) => ({
         ...v,
-        vaultId: index, // retain the real contract index
+        vaultId: index,
         unlockTime: Number(v.unlockTime),
         amount: v.amount,
         withdrawn: v.withdrawn,
@@ -91,10 +99,11 @@ export default function VaultApp() {
         label: v.label,
         beneficiary: v.beneficiary
       }));
-  
+
+      // Filter vaults based on unlock time and withdrawal status
       const locked = fullList.filter(v => !v.withdrawn && now < v.unlockTime);
       const unlocked = fullList.filter(v => !v.withdrawn && now >= v.unlockTime);
-  
+
       setLockedVaults(locked);
       setUnlockedVaults(unlocked);
     } catch (err) {
@@ -103,14 +112,13 @@ export default function VaultApp() {
       setUnlockedVaults([]);
     }
   }, [contract, account]);
-  
-  
 
+  // Initial fetch when account/contract is ready
   useEffect(() => {
-    fetchVaults();  // ✅ safe to call now
-  }, [fetchVaults]);  // ✅ warning gone
-  
+    fetchVaults();
+  }, [fetchVaults]);
 
+  // Countdown timer for locked vaults
   useEffect(() => {
     const interval = setInterval(() => {
       const now = Math.floor(Date.now() / 1000);
@@ -131,10 +139,12 @@ export default function VaultApp() {
     return () => clearInterval(interval);
   }, [lockedVaults]);
 
+  // Track input changes for partial withdrawal
   const handleWithdrawChange = (vaultId, value) => {
     setWithdrawInputs(prev => ({ ...prev, [vaultId]: value }));
   };
 
+  // Withdraw logic
   async function withdraw(vaultId, maxAmount) {
     const inputAmount = withdrawInputs[vaultId];
     const parsedInput = parseFloat(inputAmount);
@@ -159,6 +169,7 @@ export default function VaultApp() {
     }
   }
 
+  // Render vaults as table (locked or unlocked)
   const renderTable = (vaults, isUnlocked) => (
     <table className="vault-table">
       <thead>
@@ -185,7 +196,6 @@ export default function VaultApp() {
             </td>
             <td>{v.label}</td>
             <td><strong>Child's Account:</strong><br />{v.beneficiary}</td>
-
             <td>{v.withdrawn ? "✅ Withdrawn" : isUnlocked ? "🔓 Unlocked" : "🔒 Locked"}</td>
             <td>
               {isUnlocked && !v.withdrawn && (
@@ -207,6 +217,7 @@ export default function VaultApp() {
     </table>
   );
 
+  // Main UI rendering
   return (
     <div className="vault-app">
       <h2>⏳ Advanced Custodial Vault</h2>
@@ -216,16 +227,13 @@ export default function VaultApp() {
       ) : (
         <div>
           <p style={{
-    fontWeight: 900,           // extra-bold
-    color: "green",
-    fontSize: "1.5rem",        // bigger text
-    letterSpacing: "0.05em"    // optional slight spread
-  }}
->
-  Connected Wallet: {account}
-</p>
-
-
+            fontWeight: 900,
+            color: "green",
+            fontSize: "1.5rem",
+            letterSpacing: "0.05em"
+          }}>
+            Connected Wallet: {account}
+          </p>
 
           <div className="deposit-form">
             <h3>💰 Deposit ETH</h3>
